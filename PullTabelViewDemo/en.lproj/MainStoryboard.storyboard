@@ -1,23 +1,96 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="2519" systemVersion="12A206j" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="2">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="3084" systemVersion="12D78" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="6ho-O9-e0j">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="1856"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="2083"/>
     </dependencies>
     <scenes>
-        <!--class Prefix:identifier View Controller-->
+        <!--View Controller-->
         <scene sceneID="5">
             <objects>
                 <viewController id="2" customClass="ViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="3">
-                        <rect key="frame" x="0.0" y="20" width="320" height="460"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
+                    <navigationItem key="navigationItem" id="KQE-YL-pIK">
+                        <barButtonItem key="rightBarButtonItem" title="xib" id="zMt-wE-I7M">
+                            <connections>
+                                <segue destination="2qy-BK-ms3" kind="push" id="KeN-Tn-tbR"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="57" y="41"/>
+        </scene>
+        <!--Xib TableVC-->
+        <scene sceneID="H7M-6f-q1d">
+            <objects>
+                <viewController id="2qy-BK-ms3" customClass="XibTableVC" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="foe-hJ-cph">
+                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="YvU-v4-myM" customClass="PullTableView">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="2qy-BK-ms3" id="4gZ-mC-nIR"/>
+                                    <outlet property="delegate" destination="2qy-BK-ms3" id="leK-v2-5T6"/>
+                                    <outlet property="pullDelegate" destination="2qy-BK-ms3" id="qgn-ZY-ZIR"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="Hhh-dq-3b1"/>
+                    <connections>
+                        <outlet property="xibTableView" destination="YvU-v4-myM" id="bIa-If-5vc"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="WNQ-au-rpN" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="412" y="47"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="ufF-JE-qCr">
+            <objects>
+                <navigationController id="6ho-O9-e0j" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="qJL-IL-EpO">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="2" kind="relationship" relationship="rootViewController" id="tCM-iD-s7r"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="6C1-QY-AKK" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-361" y="41"/>
         </scene>
     </scenes>
+    <classes>
+        <class className="PullTableView" superclassName="UITableView">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/PullTableView.h"/>
+            <relationships>
+                <relationship kind="outlet" name="pullDelegate"/>
+            </relationships>
+        </class>
+        <class className="ViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/ViewController.h"/>
+        </class>
+        <class className="XibTableVC" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/XibTableVC.h"/>
+            <relationships>
+                <relationship kind="outlet" name="xibTableView" candidateClass="PullTableView"/>
+            </relationships>
+        </class>
+    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

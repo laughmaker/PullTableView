@@ -21,18 +21,20 @@ typedef enum
 
 @interface PullTableView : UITableView <UIScrollViewDelegate>
 
-@property (weak, nonatomic) id <PullTableViewDelegate> pullDelegate;
-@property (assign, nonatomic, readonly) PRRefreshType  refreshType;
+//刷新代理，必须实现
+@property (weak, nonatomic) IBOutlet id <PullTableViewDelegate> pullDelegate;
+
+//设置不同的刷新类型，默认为PRPullBoth。
+@property (assign, nonatomic) PRRefreshType         refreshType;
 
 //如果为上拉加载更多，则headerView为nil;
 @property (strong, nonatomic, readonly) RefreshView *headerView;
-//如果为下拉刷新则footerView为nil;
+//如果为下拉刷新，则footerView为nil;
 @property (strong, nonatomic, readonly) RefreshView *footerView;
 
-//自动滑动到下一页，默认为NO
-@property (assign, nonatomic) BOOL autoScrollToNextPage;
 
-- (PullTableView *)initWithFrame:(CGRect)frame refreshType:(PRRefreshType)refreshType;
+//只需要实现这个初始化方法即可
+- (id)initWithFrame:(CGRect)frame;
 
 //在主类中通过ScrollView的两个代理调用这两个方法,必须实现。
 - (void)pullTableViewDidScroll:(UIScrollView *)scrollView;
@@ -40,12 +42,6 @@ typedef enum
 
 //加载完成后调用以取消菊花旋转
 - (void)stopPullTableViewRefresh;
-
-
-//设置刷新视图中的文字
-- (void)setRefreshViewNormalTitle:(NSString *)normalTitle loadingTitle:(NSString *)loadingTitle pullingTitle:(NSString *)pullingTitle atTop:(BOOL)top;
-- (void)setRefreshViewSubtitle:(NSString *)subtitle atTop:(BOOL)top;
-
 
 @end
 

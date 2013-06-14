@@ -1,23 +1,18 @@
 //
-//  ViewController.m
+//  XibTableVC.m
 //  PullTabelViewDemo
 //
-//  Created by line0 on 13-5-27.
+//  Created by line0 on 13-6-14.
 //  Copyright (c) 2013年 makeLaugh. All rights reserved.
 //
 
-#import "ViewController.h"
-#import "PullTableView.h"
+#import "XibTableVC.h"
 
-@interface ViewController () <UITableViewDataSource, UITableViewDelegate, PullTableViewDelegate>
-@property (strong, nonatomic) PullTableView  *pullTableView;
-
-@property (strong, nonatomic) NSMutableArray *datas;
-
+@interface XibTableVC ()
 
 @end
 
-@implementation ViewController
+@implementation XibTableVC
 
 - (void)viewDidLoad
 {
@@ -30,12 +25,7 @@
         [self.datas addObject:str];
     }
     
-    self.pullTableView = [[PullTableView alloc] initWithFrame:CGRectMake(0, 0, 320, self.view.frame.size.height - 44)];
-    [self.pullTableView setRefreshType:PRPullBoth];
-    [self.pullTableView setDelegate:self];
-    [self.pullTableView setDataSource:self];
-    [self.pullTableView setPullDelegate:self];
-    [self.view addSubview:self.pullTableView];
+    [self.xibTableView setRefreshType:PRPullBoth];
 }
 
 - (void)addData
@@ -45,7 +35,7 @@
         NSString *str = [NSString stringWithFormat:@"cell%d", i + self.datas.count];
         [self.datas addObject:str];
     }
-    [self.pullTableView reloadData];
+    [self.xibTableView reloadData];
 }
 
 
@@ -86,12 +76,12 @@
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
-    [self.pullTableView pullTableViewDidScroll:scrollView];    
+    [self.xibTableView pullTableViewDidScroll:scrollView];
 }
 
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
 {
-    [self.pullTableView pullTableViewDidEndDragging:scrollView];
+    [self.xibTableView pullTableViewDidEndDragging:scrollView];
 }
 
 @end

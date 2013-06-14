@@ -13,6 +13,9 @@
 @property (assign, nonatomic) BOOL isFooterInAction;
 @property (assign, nonatomic) BOOL reachedTheEnd;
 
+@property (strong, nonatomic) RefreshView *headerView;
+@property (strong, nonatomic) RefreshView *footerView;
+
 
 @end
 
@@ -24,41 +27,75 @@
     [self removeObserver:self forKeyPath:@"contentSize"];
 }
 
-- (PullTableView *)initWithFrame:(CGRect)frame refreshType:(PRRefreshType)refreshType
+
+#pragma mark - Init
+
+- (id)initWithFrame:(CGRect)frame
 {
     self = [self initWithFrame:frame style:UITableViewStylePlain];
+    if (self)  { }
+    
+    return self;
+}
+
+- (id)initWithCoder:(NSCoder *)aDecoder
+{
+    self = [super initWithCoder:aDecoder];
     if (self)
     {
-        _refreshType = refreshType;
-        self.autoScrollToNextPage = NO;
-        
-        CGRect rect = CGRectMake(0, 0 - frame.size.height, frame.size.width, frame.size.height);
-        
-        if (refreshType == PRPullDownRefresh)
-        {
-            _headerView = [[RefreshView alloc] initWithFrame:rect atTop:YES];
-            [self addSubview:self.headerView];
-        }
-        else if (refreshType == PRPullUpLoadMore)
-        {
-            rect = CGRectMake(0, frame.size.height - 15, frame.size.width, frame.size.height);
-            _footerView = [[RefreshView alloc] initWithFrame:rect atTop:NO];
-            [self addSubview:_footerView];
-        }
-        else if (refreshType == PRPullBoth)
-        {
-            _headerView = [[RefreshView alloc] initWithFrame:rect atTop:YES];
-            [self addSubview:self.headerView];
+        [self defaultInit];
+    }
+    return self;
+}
 
-            rect = CGRectMake(0, frame.size.height, frame.size.width, frame.size.height);
-            _footerView = [[RefreshView alloc] initWithFrame:rect atTop:NO];
-            [self addSubview:_footerView];
-        }
-        
-        [self addObserver:self forKeyPath:@"contentSize" options:NSKeyValueObservingOptionNew context:nil];
+- (id)initWithFrame:(CGRect)frame style:(UITableViewStyle)style
+{
+    self = [super initWithFrame:frame style:UITableViewStylePlain];
+    if (self)
+    {
+        [self defaultInit];
     }
     
     return self;
+}
+
+- (void)defaultInit
+{
+    self.refreshType = PRPullBoth;
+    [self addObserver:self forKeyPath:@"contentSize" options:NSKeyValueObservingOptionNew context:nil];
+}
+
+
+#pragma mark - Property
+
+- (void)setRefreshType:(PRRefreshType)refreshType
+{
+    _refreshType = refreshType;
+    [self.headerView removeFromSuperview];
+    [self.footerView removeFromSuperview];
+
+    CGRect rect = CGRectMake(0, 0 - self.frame.size.height, self.frame.size.width, self.frame.size.height);
+    
+    if (refreshType == PRPullDownRefresh)
+    {
+        self.headerView = [[RefreshView alloc] initWithFrame:rect atTop:YES];
+        [self addSubview:self.headerView];
+    }
+    else if (refreshType == PRPullUpLoadMore)
+    {
+        rect = CGRectMake(0, self.frame.size.height - 15, self.frame.size.width, self.frame.size.height);
+        self.footerView = [[RefreshView alloc] initWithFrame:rect atTop:NO];
+        [self addSubview:self.footerView];
+    }
+    else if (refreshType == PRPullBoth)
+    {
+        self.headerView = [[RefreshView alloc] initWithFrame:rect atTop:YES];
+        [self addSubview:self.headerView];
+        
+        rect = CGRectMake(0, self.frame.size.height, self.frame.size.width, self.frame.size.height);
+        self.footerView = [[RefreshView alloc] initWithFrame:rect atTop:NO];
+        [self addSubview:self.footerView];
+    }
 }
 
 - (void)setReachedTheEnd:(BOOL)reachedTheEnd
@@ -219,34 +256,6 @@
     }
 }
 
-- (void)setRefreshViewNormalTitle:(NSString *)normalTitle loadingTitle:(NSString *)loadingTitle pullingTitle:(NSString *)pullingTitle atTop:(BOOL)top
-{
-    if (top)
-    {
-        [self.headerView setNormalTitle:normalTitle];
-        [self.headerView setLoadingTitle:loadingTitle];
-        [self.headerView setPullingTitle:pullingTitle];
-    }
-    else
-    {
-        [self.footerView setNormalTitle:normalTitle];
-        [self.footerView setLoadingTitle:loadingTitle];
-        [self.footerView setPullingTitle:pullingTitle];
-    }
-}
-
-- (void)setRefreshViewSubtitle:(NSString *)subtitle atTop:(BOOL)top
-{
-    if (top)
-    {
-        [self.headerView setSubtitle:subtitle];
-    }
-    else
-    {
-        [self.footerView setSubtitle:subtitle];
-    }
-}
-
 
 #pragma mark - Observe 
 
@@ -258,12 +267,7 @@
         CGSize contentSize = self.contentSize;
         frame.origin.y = contentSize.height < self.frame.size.height ? self.frame.size.height : contentSize.height;
         _footerView.frame = frame;
-        if (self.autoScrollToNextPage && _isFooterInAction)
-        {
-            [self scrollToNextPage];
-            _isFooterInAction = NO;
-        }
-        else if (_isFooterInAction)
+        if (_isFooterInAction)
         {
             CGPoint offset = self.contentOffset;
             self.contentOffset = offset;

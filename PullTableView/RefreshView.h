@@ -24,13 +24,12 @@ typedef enum
 @interface RefreshView : UIView
 
 //默认显示刷新状态，可自行设定要显示的文字
-@property (nonatomic, strong) UILabel *titleLabel;
+@property (nonatomic, strong) UILabel *textLabel;
 
 //显示在刷新状态下面，默认为日期，可自行设定
-@property (nonatomic, strong) UILabel *subtitleLabel;
+@property (nonatomic, strong) UILabel *dateLabel;
 
 //刷新动画
-@property (nonatomic, strong) UIImageView             *arrowView;
 @property (nonatomic, strong) CALayer                 *arrowLayer;
 @property (nonatomic, strong) UIActivityIndicatorView *activityView;
 
@@ -39,14 +38,6 @@ typedef enum
 
 //刷新状态
 @property (nonatomic, assign) PRState state;
-
-//刷新三种状态对应的文字
-@property (nonatomic, strong) NSString                *normalTitle;
-@property (nonatomic, strong) NSString                *pullingTitle;
-@property (nonatomic, strong) NSString                *loadingTitle;
-
-//刷新状态对应下面的文字
-@property (nonatomic, strong) NSString                *subtitle;
 
 
 - (id)initWithFrame:(CGRect)frame atTop:(BOOL)top;

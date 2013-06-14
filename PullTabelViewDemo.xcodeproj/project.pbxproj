@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2558A34D176B08E200ED8B2F /* XibTableVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2558A34C176B08E200ED8B2F /* XibTableVC.m */; };
 		25F603D51753375C00218C0F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 25F603D41753375C00218C0F /* UIKit.framework */; };
 		25F603D71753375C00218C0F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 25F603D61753375C00218C0F /* Foundation.framework */; };
 		25F603D91753375C00218C0F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 25F603D81753375C00218C0F /* CoreGraphics.framework */; };
@@ -26,6 +27,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2558A34B176B08E200ED8B2F /* XibTableVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XibTableVC.h; sourceTree = "<group>"; };
+		2558A34C176B08E200ED8B2F /* XibTableVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XibTableVC.m; sourceTree = "<group>"; };
 		25F603D11753375C00218C0F /* PullTabelViewDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PullTabelViewDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		25F603D41753375C00218C0F /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		25F603D61753375C00218C0F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -66,10 +69,29 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2558A34E176B172D00ED8B2F /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				25F603F81753380D00218C0F /* arrowDown.png */,
+				25F603F91753380D00218C0F /* arrowUp.png */,
+			);
+			name = Images;
+			sourceTree = "<group>";
+		};
+		2558A34F176B173800ED8B2F /* Class */ = {
+			isa = PBXGroup;
+			children = (
+				25F603FA1753380D00218C0F /* PullTableView.h */,
+				25F603FB1753380D00218C0F /* PullTableView.m */,
+				25F603FC1753380D00218C0F /* RefreshView.h */,
+				25F603FD1753380D00218C0F /* RefreshView.m */,
+			);
+			name = Class;
+			sourceTree = "<group>";
+		};
 		25F603C81753375C00218C0F = {
 			isa = PBXGroup;
 			children = (
-				25F6040217533B6600218C0F /* QuartzCore.framework */,
 				25F603F71753380D00218C0F /* PullTableView */,
 				25F603DA1753375C00218C0F /* PullTabelViewDemo */,
 				25F603D31753375C00218C0F /* Frameworks */,
@@ -88,6 +110,7 @@
 		25F603D31753375C00218C0F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				25F6040217533B6600218C0F /* QuartzCore.framework */,
 				25F603D41753375C00218C0F /* UIKit.framework */,
 				25F603D61753375C00218C0F /* Foundation.framework */,
 				25F603D81753375C00218C0F /* CoreGraphics.framework */,
@@ -103,6 +126,8 @@
 				25F603EC1753375C00218C0F /* MainStoryboard.storyboard */,
 				25F603EF1753375C00218C0F /* ViewController.h */,
 				25F603F01753375C00218C0F /* ViewController.m */,
+				2558A34B176B08E200ED8B2F /* XibTableVC.h */,
+				2558A34C176B08E200ED8B2F /* XibTableVC.m */,
 				25F603DB1753375C00218C0F /* Supporting Files */,
 			);
 			path = PullTabelViewDemo;
@@ -125,12 +150,8 @@
 		25F603F71753380D00218C0F /* PullTableView */ = {
 			isa = PBXGroup;
 			children = (
-				25F603F81753380D00218C0F /* arrowDown.png */,
-				25F603F91753380D00218C0F /* arrowUp.png */,
-				25F603FA1753380D00218C0F /* PullTableView.h */,
-				25F603FB1753380D00218C0F /* PullTableView.m */,
-				25F603FC1753380D00218C0F /* RefreshView.h */,
-				25F603FD1753380D00218C0F /* RefreshView.m */,
+				2558A34F176B173800ED8B2F /* Class */,
+				2558A34E176B172D00ED8B2F /* Images */,
 			);
 			path = PullTableView;
 			sourceTree = "<group>";
@@ -208,6 +229,7 @@
 				25F603F11753375C00218C0F /* ViewController.m in Sources */,
 				25F604001753380D00218C0F /* PullTableView.m in Sources */,
 				25F604011753380D00218C0F /* RefreshView.m in Sources */,
+				2558A34D176B08E200ED8B2F /* XibTableVC.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -295,6 +317,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "PullTabelViewDemo/PullTabelViewDemo-Prefix.pch";
 				INFOPLIST_FILE = "PullTabelViewDemo/PullTabelViewDemo-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -306,6 +329,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "PullTabelViewDemo/PullTabelViewDemo-Prefix.pch";
 				INFOPLIST_FILE = "PullTabelViewDemo/PullTabelViewDemo-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -330,6 +354,7 @@
 				25F603F61753375C00218C0F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
